@@ -50,7 +50,7 @@
 #include "net/rpl/rpl.h"
 #include <stdio.h>
 #include <string.h>
-
+#include "ip64-addr.h"
 
 #define UDP_PORT 1234
 #define SERVICE_ID 190
@@ -86,11 +86,11 @@ receiver(struct simple_udp_connection *c,
 
 uip_ipaddr_t *addr;
 
-uip_ipaddr_copy(addr, sender_addr);
+ip64_addr_copy6(addr,sender_addr);
 
-  uip_ip6addr(&addr, UIP_DS6_DEFAULT_PREFIX, 0, 0, 0, 0, 0, 0, 0);
-  uip_ds6_set_addr_iid(&addr, &uip_lladdr);
-  uip_ds6_addr_add(&addr, 0, ADDR_AUTOCONF);
+ uip_ip6addr(addr, UIP_DS6_DEFAULT_PREFIX, 0, 0, 0, 0, 0, 0, 0);
+ uip_ds6_set_addr_iid(addr, &uip_lladdr);
+ uip_ds6_addr_add(addr, 0, ADDR_AUTOCONF);
 
 
     if(addr != NULL) {
